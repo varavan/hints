@@ -6,7 +6,7 @@ That is the purpose for of this project. To have a set of hints that can be easi
  
 # Installation
 
-Install it via composer
+Install it via composer with `composer require varavan/hints`
 
 # Usage
 
@@ -15,7 +15,7 @@ I would encourage you to create a symlink between the executable file `hints` an
 
 I would advice you to call `hints` command on `composer` `post-scripts`, so everyone can refresh thoose knowleage pills on every vendor updates
 
-Please notice that the storage for this application is a file called `hints.json` that will be included 
+Please notice that the storage for this application is a file called `hints.json` that will be versioned
 
 
 - `hints add 'content of the hint' --author 'ADD AN AUTHOR' --tags 'ADD TAGS SEPARATE BY COMMA'` 
