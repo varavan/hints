@@ -1,0 +1,23 @@
+{
+    "name": "varavan/hints",
+    "authors": [
+        {
+            "name": "Ivan Ruiz",
+            "email": "ivan.ruiz@trivago.com"
+        }
+    ],
+    "description": "Sharing knowledge made easy",
+    "type": "application",
+    "autoload": {
+        "psr-4": {
+            "Hints\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "symfony/console": "~3.1",
+        "symfony/dependency-injection": "~3.1",
+        "symfony/config": "~3.1",
+        "symfony/yaml": "~3.1"
+    }
+}
