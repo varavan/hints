@@ -1,0 +1,20 @@
+services:
+
+  app.component.hints_file_store:
+    class: Hints\Component\HintsFileStore
+
+  app.component.hint_reader:
+    class: Hints\Component\HintReader
+    arguments:
+      - "@app.component.hints_file_store"
+
+  app.component.hint_writer:
+    class: Hints\Component\HintWriter
+    arguments:
+      - "@app.component.hints_file_store"
+
+  app.repository.hint:
+    class: Hints\Repository\HintRepository
+    arguments:
+      - "@app.component.hint_writer"
+      - "@app.component.hint_reader"
