@@ -71,8 +71,12 @@ class HintRepository
         );
     }
 
-
+    /**
+     * @param Hint $hint
+     * @return Hint
+     */
     public function add(Hint $hint){
         $this->hintWriter->write($hint);
+        return $hint;
     }
 }

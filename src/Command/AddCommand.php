@@ -1,6 +1,7 @@
 <?php
 namespace Hints\Command;
 
+use Hints\Component\HintTablePrinter;
 use Hints\Model\Dto\Hint;
 use Hints\Model\Dto\Tag;
 use Symfony\Component\Console\Command\Command;
@@ -65,16 +66,12 @@ class AddCommand extends Command implements ContainerAwareInterface
             }
         }
 
-        $this->container->get('app.repository.hint')->add($hint);
+        $hint = $this->container->get('app.repository.hint')->add($hint);
 
-        // outputs multiple lines to the console (adding "\n" at the end of each line)
-        $output->writeln([
-            'Hint Creation',
-            '============',
-            'Author: '. ((is_null($hint->author)) ? 'Anonymous' : $hint->author),
-            'Content: '.$hint->content,
-            'Tags: ' . (implode(',', array_map(function($tag){ return $tag->name; }, $hint->tags)))
-        ]);
+        $tableHelper = new HintTablePrinter($output);
+
+        $tableHelper->addHint($hint);
+        $tableHelper->finish();
 
 
     }
