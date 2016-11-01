@@ -1,7 +1,7 @@
 <?php
 namespace Hints\Command;
 
-use Hints\Component\HintTablePrinter;
+use Hints\Component\HintFormattedPrinter;
 use Hints\Model\Dto\Hint;
 use Hints\Model\Dto\Tag;
 use Symfony\Component\Console\Command\Command;
@@ -68,8 +68,7 @@ class AddCommand extends Command implements ContainerAwareInterface
 
         $hint = $this->container->get('app.repository.hint')->add($hint);
 
-        $tableHelper = new HintTablePrinter($output);
-
+        $tableHelper = new HintFormattedPrinter($output);
         $tableHelper->addHint($hint);
         $tableHelper->finish();
 

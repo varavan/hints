@@ -5,6 +5,7 @@ namespace Hints\Component;
 
 use Hints\Model\Dto\Hint;
 use Symfony\Component\Console\Helper\Table;
+use Symfony\Component\Console\Helper\TableCell;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class HintTablePrinter
@@ -19,7 +20,6 @@ class HintTablePrinter
         $this->output = $output;
 
         $this->table = new Table($output);
-        $this->table->setColumnWidths([70, 10, 20]);
         $this->table->setStyle('borderless');
         $this->table->setHeaders(
             ['Content', 'Author', 'Tags']
@@ -73,7 +73,7 @@ class HintTablePrinter
     {
         $this->table->addRow(
             [
-                $hint->content,
+                new TableCell($hint->content, array('rowspan' => 2)),
                 $hint->author,
                 (empty($hint->tags)) ? 'No tag' : implode(',', array_map(function ($tag) {
                     return $tag->name;

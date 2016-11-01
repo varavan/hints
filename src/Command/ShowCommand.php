@@ -2,10 +2,8 @@
 
 namespace Hints\Command;
 
-use Hints\Component\HintTablePrinter;
-use Hints\Model\Dto\Hint;
+use Hints\Component\HintFormattedPrinter;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -58,7 +56,7 @@ class ShowCommand extends Command implements ContainerAwareInterface
             return;
         }
 
-        $tableHelper = new HintTablePrinter($output);
+        $tableHelper = new HintFormattedPrinter($output);
         $tableHelper->addHints($hints, $input->getOption('limit'));
         $tableHelper->finish();
     }
