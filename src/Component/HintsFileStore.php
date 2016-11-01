@@ -48,6 +48,6 @@ class HintsFileStore
     }
 
     private function storeArrayOnFile($array){
-        file_put_contents(self::FILENAME, json_encode($array));
+        file_put_contents(self::FILENAME, json_encode($array, JSON_PRETTY_PRINT));
     }
 }
