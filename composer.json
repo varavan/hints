@@ -20,6 +20,6 @@
         "symfony/dependency-injection": "~3.1",
         "symfony/config": "~3.1",
         "symfony/yaml": "~3.1",
-        "phpunit/phpunit": "~5.0"
+        "phpunit/phpunit": "^5.0"
     }
 }
