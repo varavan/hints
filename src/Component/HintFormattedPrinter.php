@@ -36,8 +36,12 @@ class HintFormattedPrinter implements HintPrinterInterface
 
     public function setOutput(OutputInterface $output){
         $this->output = $output;
+
         $style = new OutputFormatterStyle('white', 'black', array('bold', 'blink'));
         $this->output->getFormatter()->setStyle('code',$style);
+
+        $style = new OutputFormatterStyle('red', null, array('bold', 'blink'));
+        $this->output->getFormatter()->setStyle('tags',$style);
     }
 
     public function addHint(Hint $hint){
@@ -58,7 +62,7 @@ class HintFormattedPrinter implements HintPrinterInterface
             $readSomeFileLines = new ReadSomeFileLines($this->buildAbsoluteFilePath->build($hint->fileComment->path));
             $formattedFileCommentBlock = $this->formatter
                 ->formatBlock(
-                    sprintf('File Path: %s , File Line: %s', $hint->fileComment->path, $hint->fileComment->line),
+                    sprintf('File Path: %s , File Line: %s', $hint->fileComment->path, (is_null($hint->fileComment->line) ? 'No line' : $hint->fileComment->line)),
                     'info',
                     true
                 );
@@ -74,7 +78,7 @@ class HintFormattedPrinter implements HintPrinterInterface
             }
         }
 
-        $formattedBlock = $this->formatter->formatBlock($tags, 'question');
+        $formattedBlock = $this->formatter->formatBlock(implode(' ,', $tags), 'tags');
 
         $this->output->writeln($formattedBlock);
     }

@@ -17,11 +17,15 @@ I would advice you to call `hints` command on `composer` `post-scripts`, so ever
 
 Please notice that the storage for this application is a file called `hints.json` that will be versioned
 
+*adding hints*
+`hints add 'content of the hint' --author 'ADD AN AUTHOR' --tags 'ADD TAGS SEPARATE BY COMMA' --file-path 'FILE_PATH_FOR_CONTENT_RELATED' --file-line 'FILE_LINE'` 
 
-- `hints add 'content of the hint' --author 'ADD AN AUTHOR' --tags 'ADD TAGS SEPARATE BY COMMA'` 
-- `hints show` will randomly show a hint. You can set up a limit of messages with flag `--limit`, by default is 1
-- `hints show --tags 'TAGS SEPARATE BY COMA'`  show random hints filtering by tags. You can use the flag limit too
-- `hints show --author 'AUTHOR'` show random hints filtering by author. You can use the flag limit too
+*listing hints*
+`hints show` . You can use diferent filters as a command option. Options are `tags`, `author`, `file-path`. 
+ Also you can set up a limit by option `limit`, by default 1
+ 
+ For example `hints show --author 'Jhon Doe' --tags 'set-up,init' --limit 15`
+ 
 
 # Status
 
