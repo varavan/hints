@@ -56,9 +56,10 @@ class ShowCommand extends Command implements ContainerAwareInterface
             return;
         }
 
-        $tableHelper = new HintFormattedPrinter($output);
-        $tableHelper->addHints($hints, $input->getOption('limit'));
-        $tableHelper->finish();
+        $hintPrinter = $this->container->get('app.component.hint_printer');
+        $hintPrinter->setOutput($output);
+        $hintPrinter->addHints($hints, $input->getOption('limit'));
+        $hintPrinter->finish();
     }
 
 

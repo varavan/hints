@@ -2,6 +2,7 @@
 namespace Hints\Command;
 
 use Hints\Component\HintFormattedPrinter;
+use Hints\Factory\HintDtoFactory;
 use Hints\Model\Dto\Hint;
 use Hints\Model\Dto\Tag;
 use Symfony\Component\Console\Command\Command;
@@ -43,35 +44,30 @@ class AddCommand extends Command implements ContainerAwareInterface
             ->addArgument('content', InputArgument::REQUIRED, 'Set the content for the content')
             ->addOption('tags', 't', InputOption::VALUE_OPTIONAL, 'Set tags for clasifying this image, please separate it by a comma ","', null)
             ->addOption('author', 'a', InputOption::VALUE_OPTIONAL, 'Set the author for the hint', null)
+            ->addOption('file-path', 'f', InputOption::VALUE_OPTIONAL, 'Set a file path for the hint', null)
+            ->addOption('file-line', 'fl', InputOption::VALUE_OPTIONAL, 'Set a file path for the hint', null)
         ;
     }
 
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-
-        $hint = new Hint();
-        $hint->content = $input->getArgument('content');
-        $hint->author = $input->getOption('author');
-
-        if(!is_null($input->getOption('tags'))){
-            $tags = explode(',', $input->getOption('tags'));
-
-            foreach ($tags as $tagString){
-                if(is_string($tagString)){
-                    $tagObject = new Tag();
-                    $tagObject->name = $tagString;
-                    $hint->tags[] = $tagObject;
-                }
-            }
-        }
+        /** @var HintDtoFactory $hintDtoFactory */
+        $hintDtoFactory = $this->container->get('app.factory.hint_dto');
+        $hint = $hintDtoFactory->make(
+            $input->getArgument('content'),
+            $input->getOption('author'),
+            (is_null($input->getOption('tags')) ? null : explode(',', $input->getOption('tags'))),
+            $input->getOption('file-path'),
+            $input->getOption('file-line')
+        );
 
         $hint = $this->container->get('app.repository.hint')->add($hint);
 
-        $tableHelper = new HintFormattedPrinter($output);
-        $tableHelper->addHint($hint);
-        $tableHelper->finish();
-
+        $hintPrinter = $this->container->get('app.component.hint_printer');
+        $hintPrinter->setOutput($output);
+        $hintPrinter->addHint($hint);
+        $hintPrinter->finish();
 
     }
 

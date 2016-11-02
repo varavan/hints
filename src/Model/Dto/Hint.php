@@ -13,4 +13,9 @@ class Hint
      * @var Tag[]
      */
     public $tags = [];
+
+    /**
+     * @var FileComment
+     */
+    public $fileComment;
 }

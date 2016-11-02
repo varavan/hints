@@ -71,6 +71,10 @@ class HintRepository
         );
     }
 
+    public function byFilePath($filePath){
+
+    }
+
     /**
      * @param Hint $hint
      * @return Hint

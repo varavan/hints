@@ -7,14 +7,41 @@ services:
     class: Hints\Component\HintReader
     arguments:
       - "@app.component.hints_file_store"
+      - "@app.factory.hint_dto"
 
   app.component.hint_writer:
     class: Hints\Component\HintWriter
     arguments:
       - "@app.component.hints_file_store"
 
+  app.component.build_absolute_file_path:
+    class: Hints\Component\BuildAbsoluteFilePath
+    arguments:
+      - "%relative_project_path%"
+
+  app.component.hint_printer:
+    alias: app.component.hint_printer_formatted
+
+  app.component.hint_printer_formatted:
+    class: Hints\Component\HintFormattedPrinter
+    arguments:
+      - "@app.component.build_absolute_file_path"
+
+  app.component.hint_printer_table:
+    class: Hints\Component\HintFormattedPrinter
+
   app.repository.hint:
     class: Hints\Repository\HintRepository
     arguments:
       - "@app.component.hint_writer"
       - "@app.component.hint_reader"
+
+  app.factory.hint_dto:
+    class: Hints\Factory\HintDtoFactory
+    arguments:
+      - "@app.factory.file_comment_dto"
+
+  app.factory.file_comment_dto:
+    class: Hints\Factory\FileCommentDtoFactory
+    arguments:
+      - "@app.component.build_absolute_file_path"

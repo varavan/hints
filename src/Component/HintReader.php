@@ -2,6 +2,7 @@
 
 namespace Hints\Component;
 
+use Hints\Factory\HintDtoFactory;
 use Hints\Model\Dto\Hint;
 use Hints\Model\Dto\Tag;
 
@@ -11,10 +12,17 @@ class HintReader
      * @var HintsFileStore
      */
     private $hintsFileStore;
+    /**
+     * @var HintDtoFactory
+     */
+    private $hintDtoFactory;
 
-    public function __construct(HintsFileStore $hintsFileStore)
+    public function __construct(
+        HintsFileStore $hintsFileStore,
+        HintDtoFactory $hintDtoFactory)
     {
         $this->hintsFileStore = $hintsFileStore;
+        $this->hintDtoFactory = $hintDtoFactory;
     }
 
     /**
@@ -28,20 +36,22 @@ class HintReader
         $dtos = [];
 
         foreach ($datas as $data) {
-            $object = new Hint();
-            $object->content = $data['content'];
-            $object->author = $data['author'];
 
+            $tagsName = [];
             if (!empty($data['tags'])) {
                 foreach ($data['tags'] as $tag) {
-
-                    $tagObject = new Tag();
-                    $tagObject->name = $tag['name'];
-                    $object->tags[] = $tagObject;
+                    $tagsName[] = $tag['name'];
                 }
             }
 
-            $dtos[] = $object;
+            $dtos[] = $this->hintDtoFactory->make(
+                $data['content'],
+                $data['author'],
+                (empty($tagsName)) ? null : $tagsName,
+                (array_key_exists('fileComment', $data) ? $data['fileComment']['path'] : null),
+                (array_key_exists('fileComment', $data) ? $data['fileComment']['line'] : null)
+            );
+
         }
 
         return $dtos;

@@ -2,28 +2,25 @@
 
 namespace Hints\Component;
 
-
 use Hints\Model\Dto\Hint;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Helper\TableCell;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class HintTablePrinter
+class HintTablePrinter implements  HintPrinterInterface
 {
     /**
      * @var OutputInterface
      */
     private $output;
+    /**
+     * @var Table
+     */
+    private $table;
 
-    public function __construct(OutputInterface $output)
-    {
+    public function setOutput(OutputInterface $output){
         $this->output = $output;
-
-        $this->table = new Table($output);
-        $this->table->setStyle('borderless');
-        $this->table->setHeaders(
-            ['Content', 'Author', 'Tags']
-        );
+        $this->initTable($this->output);
     }
 
     public function addHint(Hint $hint)
@@ -79,6 +76,18 @@ class HintTablePrinter
                     return $tag->name;
                 }, $hint->tags))
             ]
+        );
+    }
+
+    /**
+     * @param $output
+     */
+    private function initTable($output)
+    {
+        $this->table = new Table($output);
+        $this->table->setStyle('borderless');
+        $this->table->setHeaders(
+            ['Content', 'Author', 'Tags']
         );
     }
 }

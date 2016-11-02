@@ -5,8 +5,10 @@
 
 if(file_exists(__DIR__.'/../../autoload.php')){
   require __DIR__.'/../../autoload.php';
+  $relativeProjectPath = '/../../../';
 }elseif (file_exists(__DIR__.'/vendor/autoload.php')) {
   require __DIR__.'/vendor/autoload.php';
+  $relativeProjectPath = '/';
 }else{
   throw new Exception("No vendors found");
   
@@ -15,6 +17,7 @@ if(file_exists(__DIR__.'/../../autoload.php')){
 use Symfony\Component\Console\Application;
 
 $container = new \Symfony\Component\DependencyInjection\ContainerBuilder();
+$container->setParameter('relative_project_path', $relativeProjectPath);
 $loader = new \Symfony\Component\DependencyInjection\Loader\YamlFileLoader($container, new \Symfony\Component\Config\FileLocator(__DIR__.'/src/Resources/config'));
 $loader->load('services.yml');
 

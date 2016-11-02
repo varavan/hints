@@ -4,6 +4,7 @@ namespace Hints\Component;
 
 
 use Hints\Model\Dto\Hint;
+use Symfony\Component\Console\Output\OutputInterface;
 
 interface HintPrinterInterface
 {
@@ -13,4 +14,6 @@ interface HintPrinterInterface
     public function addHints($hints, $limit);
 
     public function finish();
+
+    public function setOutput(OutputInterface $output);
 }
