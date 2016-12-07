@@ -16,10 +16,10 @@
     },
     "minimum-stability": "stable",
     "require": {
-        "symfony/console": "~3.1",
-        "symfony/dependency-injection": "~3.1",
-        "symfony/config": "~3.1",
-        "symfony/yaml": "~3.1",
+        "symfony/console": "^2.8 | ~3.1",
+        "symfony/dependency-injection": "^2.8 | ~3.1",
+        "symfony/config": "^2.8 | ~3.1",
+        "symfony/yaml": "^2.8 | ~3.1",
         "phpunit/phpunit": "~5.0"
     }
 }
