@@ -34,6 +34,6 @@ class BuildAbsoluteFilePath
      */
     private function buildFileAbsoluteFilePath($filePath)
     {
-        return __DIR__ . '/../../' . $this->relativeProjectPath . ltrim($filePath, '/');
+        return __DIR__ . '/../../' . $this->relativeProjectPath . "/" .ltrim($filePath, '/');
     }
 }
