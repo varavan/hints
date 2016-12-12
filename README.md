@@ -1,6 +1,6 @@
 # Hints
 
-This tool is made for sharing knowleage on php projects where more than one developer is working. 
+This tool is made for sharing knowledge on php projects where more than one developer is working.
 Have you ever found yourself trying to fix something for ages, then someone else tell you an small hint that makes you resolve it within minutes? 
 That is the purpose for of this project. To have a set of hints that can be easily add or shown from your terminal. 
  
