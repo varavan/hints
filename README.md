@@ -1,14 +1,26 @@
 # Hints
 
-This tool is made for sharing knowledge on php projects where more than one developer is working.
+Microlearning tool for sharing knowledge on php projects, no mather how complex is the project.
 Have you ever found yourself trying to fix something for ages, then someone else tell you an small hint that makes you resolve it within minutes? 
 That is the purpose for of this project. To have a set of hints that can be easily add or shown from your terminal. 
+
+## Example
+
+**show random hint**
+![show random hint](http://imageshack.com/a/img921/7041/F68V3j.png "Show random hint")
+
+**show hint related to some code**
+![show hint related to some code](http://imageshack.com/a/img922/9554/lDaVmi.png "show hint related to some code")
+
+**adding a new hint**
+![adding new hints](http://imageshack.com/a/img922/6244/zZyV9D.png "adding new hints")
+
  
-# Installation
+## Installation
 
 Install it via composer with `composer require varavan/hints`
 
-# Usage
+## Usage
 
 There is an entry point for the application which is the file `hints`. After the installation you can call it via `vendor/varavan/hints/hints` As long as this project is thought to be implemented on php projects, the app is written on php. 
 
@@ -36,6 +48,6 @@ Please notice that the storage for this application is a file called `hints.json
 For example `hints show --author 'Jhon Doe' --tags 'set-up,init' --limit 15`
  
 
-# Status
+## Status
 
-This library is still on an early development. You can find some bugs and errors on it. Please report it :)
+This library is still on development. You can find some bugs and errors on it. Please report it :)
